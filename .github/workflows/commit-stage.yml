@@ -27,6 +27,8 @@ jobs:
           scan-type: 'fs'
           scan-ref: '.'
           trivy-config: trivy.yaml
+          format: 'sarif'
+          output: 'trivy-results.sarif'
 
       - name: Upload vulnerability report
         uses: github/codeql-action/upload-sarif@v3
