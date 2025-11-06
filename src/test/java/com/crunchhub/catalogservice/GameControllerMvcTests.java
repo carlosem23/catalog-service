@@ -22,7 +22,7 @@ public class GameControllerMvcTests {
 
     @Test
     void whenGetGameNotExistingThenReturn404() throws Exception {
-        int id = 12345;
+        Long id = 12345L;
         given(gameService.viewGameDetails(id)).willThrow(GameNotFoundException.class);
 
         mockMvc.perform(get("/games/" + id))

@@ -21,13 +21,8 @@ public class GameValidationTest {
 
     @Test
     void whenAllFieldsCorrectThenValidationSuccessful() {
-        var game =  new Game(
-                12,
-                "Test",
-                "Test",
-                "September 2nd, 2025",
-                "Fantasy"
-        );
+        var game = Game.of("Cats eating cookies", "Test", "2rd of November", "Action");
+
 
         Set<ConstraintViolation<Game>> violations = validator.validate(game);
         assertThat(violations).isEmpty();
@@ -35,13 +30,8 @@ public class GameValidationTest {
 
     @Test
     void whenNameIsEmptyThenValidationFails() {
-        var game =  new Game(
-                12,
-                "",
-                "Test",
-                "September 2nd, 2025",
-                "Fantasy"
-        );
+        var game = Game.of("Cats eating cookies", "Test", "2rd of November", "Action");
+
         Set<ConstraintViolation<Game>> violations = validator.validate(game);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo("The name of the game must be defined.");

@@ -21,7 +21,7 @@ public class GameController {
     }
 
     @GetMapping("{id}")
-    public Game getGame(@PathVariable int id) {
+    public Game getGame(@PathVariable Long id) {
         return gameService.viewGameDetails(id);
     }
 
@@ -32,13 +32,13 @@ public class GameController {
     }
 
     @PutMapping("{id}")
-    public Game updateGame(@PathVariable int id, @Valid @RequestBody Game game) {
+    public Game updateGame(@PathVariable Long id, @Valid @RequestBody Game game) {
         return gameService.editGameDetails(id, game);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGame(@PathVariable int id) {
+    public void deleteGame(@PathVariable Long id) {
         gameService.removeGameFromCatalog(id);
     }
 }

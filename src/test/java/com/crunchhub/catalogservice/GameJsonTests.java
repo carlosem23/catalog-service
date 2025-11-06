@@ -15,38 +15,29 @@ public class GameJsonTests {
 
     @Test
     void testSerialize() throws Exception {
-        var game =  new Game(
-                12,
-                "Test",
-                "Test",
-                "September 2nd, 2025",
-                "Fantasy"
-        );
+        var game = Game.of("Cats eating cookies", "Test", "2rd of November", "Fantasy");
         var jsonContent = json.write(game);
-        assertThat(jsonContent).extractingJsonPathNumberValue("@.id").isEqualTo(12);
-        assertThat(jsonContent).extractingJsonPathStringValue("@.name").isEqualTo("Test");
+        assertThat(jsonContent).extractingJsonPathNumberValue("@.id").isNull();
+        assertThat(jsonContent).extractingJsonPathStringValue("@.name").isEqualTo("Cats eating cookies");
         assertThat(jsonContent).extractingJsonPathStringValue("@.creator").isEqualTo("Test");
-        assertThat(jsonContent).extractingJsonPathStringValue("@.dateOfCreation").isEqualTo("September 2nd, 2025");
+        assertThat(jsonContent).extractingJsonPathStringValue("@.dateOfCreation").isEqualTo("2rd of November");
         assertThat(jsonContent).extractingJsonPathStringValue("@.genre").isEqualTo("Fantasy");
     }
 
     @Test
     void testDeserialize() throws Exception {
-        var game =  new Game(
-                12,
-                "Test",
-                "Test",
-                "September 2nd, 2025",
-                "Fantasy"
-        );
+        var game = Game.of("Cats eating cookies", "Test", "2rd of November", "Fantasy");
+
         var jsonContent =
              """
              {
-             "id": "12",
-             "name": "Test",
+             "id": null,
+             "name": "Cats eating cookies",
              "creator": "Test",
-             "dateOfCreation": "September 2nd, 2025",
-             "genre": "Fantasy"
+             "dateOfCreation": "2rd of November",
+             "genre": "Fantasy",
+             "createdDate": null,
+             "lastModifiedDate": null
              }
              """;
         assertThat(json.parse(jsonContent)).usingRecursiveComparison().isEqualTo(game);

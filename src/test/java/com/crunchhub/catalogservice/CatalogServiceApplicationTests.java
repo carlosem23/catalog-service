@@ -4,12 +4,14 @@ import com.crunchhub.catalogservice.domain.Game;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
+@ActiveProfiles("integration")
 class CatalogServiceApplicationTests {
 
     @Autowired
@@ -17,13 +19,8 @@ class CatalogServiceApplicationTests {
 
     @Test
     void whenPostRequestThenGameCreated() {
-        var expectedGame =  new Game(
-                12,
-                "Test",
-                "Test",
-                "September 2nd, 2025",
-                "Fantasy"
-        );
+        var expectedGame = Game.of("Cats eating cookies", "Test", "2rd of November", "Action");
+
 
         webTestClient.post()
                 .uri("/games")

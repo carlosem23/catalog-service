@@ -1,11 +1,30 @@
 spring:
   application:
     name: catalog-service
+  config:
+    import: "optional:configserver:http://localhost:8081"
+  cloud:
+    config:
+      uri: http://localhost:8081
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5544/crunchd_catalog
+    hikari:
+      connection-timeout: 10000
+      maximum-pool-size: 5
+
 server:
-  port: 8081
+  port: 8082
   tomcat:
     connection-timeout: 2s
     keep-alive-timeout: 15s
     threads:
       max: 50
       min-spare: 5
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: refresh

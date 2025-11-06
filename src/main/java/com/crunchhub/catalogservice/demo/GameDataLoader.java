@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Profile("testdata")
 public class GameDataLoader {
@@ -17,22 +19,18 @@ public class GameDataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
-        var game1 = new Game(
-                123,
+        gameRepository.deleteAll();
+        var game1 = Game.of(
                 "Test",
                 "Test",
                 "2nd of September, 2025",
-                "MOBA"
-        );
-        var game2 = new Game(
-                124,
+                "MOBA");
+        var game2 = Game.of(
                 "Test2",
                 "Test2",
                 "3rd of September, 2025",
-                "MMO RPG"
-        );
+                "MMO RPG");
 
-        gameRepository.save(game1);
-        gameRepository.save(game2);
+        gameRepository.saveAll(List.of(game1, game2));
     }
 }

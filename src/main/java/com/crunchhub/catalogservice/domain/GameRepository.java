@@ -1,11 +1,11 @@
 package com.crunchhub.catalogservice.domain;
 
+import org.springframework.data.repository.CrudRepository;
+
 import java.util.Optional;
 
-public interface GameRepository {
-    Iterable<Game> findAll();
-    Optional<Game> findById(int id);
-    Game save(Game game);
-    boolean existsById(int id);
-    void deleteById(int id);
+public interface GameRepository extends CrudRepository<Game, Long> {
+    Iterable<Game> findAllByCreator(String creator);
+    Iterable<Game> findAllByGenre(String genre);
+    Optional<Game> findByName(String name);
 }

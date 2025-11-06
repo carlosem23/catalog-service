@@ -14,7 +14,7 @@ public class GameService {
         return gameRepository.findAll();
     }
 
-    public Game viewGameDetails(int id) {
+    public Game viewGameDetails(Long id) {
         return gameRepository.findById(id).orElseThrow(
                 () -> new GameNotFoundException(id)
         );
@@ -27,11 +27,11 @@ public class GameService {
         return gameRepository.save(game);
     }
 
-    public void removeGameFromCatalog(int id) {
+    public void removeGameFromCatalog(Long id) {
         gameRepository.deleteById(id);
     }
 
-    public Game editGameDetails(int id, Game game) {
+    public Game editGameDetails(Long id, Game game) {
         return gameRepository.findById(id).map(
                 existingGame -> {
                     var gameToUpdate = new Game(
@@ -39,7 +39,11 @@ public class GameService {
                             game.name(),
                             game.creator(),
                             game.dateOfCreation(),
-                            game.genre());
+                            game.genre(),
+                            game.price(),
+                            game.createdDate(),
+                            game.lastModifiedDate(),
+                            game.version());
                     return gameRepository.save(gameToUpdate);
 
                 }).orElseGet(() -> addGameToCatalog(game));
