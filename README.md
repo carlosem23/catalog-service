@@ -17,7 +17,7 @@ CrunchHub is a platform designed for the indie game development community. Wheth
 
 - **Backend**: Spring Boot (Java 17)
 - **Database**: PostgreSQL
-- **Containerization**: Docker
+- **Containerization**: Docker & Kubernetes
 - **CI/CD**: GitHub Actions
 - **Registry**: GitHub Container Registry (ghcr.io)
 - **Security**: Automated vulnerability scanning with Trivy and Grype
@@ -39,20 +39,6 @@ This is an active work-in-progress. The platform currently includes:
 - Docker
 - PostgreSQL
 
-### Running Locally
-```bash
-# Clone the repository
-git clone https://github.com/carlosem23/catalog-service.git
-
-# Build the project
-./gradlew build
-
-# Run tests
-./gradlew test
-
-# Build container image
-./gradlew bootBuildImage
-```
 
 ## CI/CD Pipeline
 
@@ -63,10 +49,4 @@ The project uses GitHub Actions for continuous integration and deployment:
 - Security scanning of container images
 - Automated publishing to GitHub Container Registry (on main branch)
 
-## Contributing
 
-This is a personal learning project, but suggestions and feedback are always welcome! Feel free to open an issue if something could be improved.
-
----
-
-Building a home for indie game developers, one commit at a time
