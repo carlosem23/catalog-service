@@ -45,6 +45,12 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew
+
+      - name: Validate k8s manifests
+        uses: docker://ghcr.io/yannh/kubeconform:latest
+        with:
+          entrypoint: '/kubeconform'
+          args: "-summary -output json kubeconfigs/"
   package:
     name: Package & Publish
     if: ${{ github.ref == 'refs/heads/master' }}
