@@ -32,7 +32,6 @@ This is an active work-in-progress. The platform currently includes:
 - Security scanning pipeline
 - More features coming soon
 
-## Getting Started
 
 ### Prerequisites
 - Java 17 or higher
